@@ -1,2 +1,2 @@
-# node-wkhtmltopdf-prebuilt
-Prebuilt set of binaries for wkhtmltopdf. No system deps necessary!
+# node-wkhtmltopdf
+Native bindings for wkhtmltopdf
