@@ -1,13 +1,13 @@
 language: cpp
 
 os:
-- linux
+#- linux
 - osx
 
 env:
   matrix:
-    - NODE_VERSION="4"
-    - NODE_VERSION="5"
+#    - NODE_VERSION="4"
+#    - NODE_VERSION="5"
     - NODE_VERSION="6"
 
 before_install:

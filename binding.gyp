@@ -7,12 +7,12 @@
       "type": "none",
       "actions": [
         {
-          "action_name": "echo_message",
+          "action_name": "build_from_source",
           "inputs": [],
-          "outputs": [],
+          "outputs": [ "/dev/null" ],
           "action": [
-            "echo",
-            "'No target needed to build!'"
+            "./lib/wkhtmltopdf/scripts/build.py",
+            "osx-cocoa-x86-64"
           ]
         }
       ]
