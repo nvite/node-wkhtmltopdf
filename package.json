@@ -1,26 +1,24 @@
 {
-  "name": "node-wkhtmltopdf",
+  "name": "node-wkhtmltopdf-prebuilt",
   "version": "1.0.0",
-  "description": "Native bindings to wkhtmltopdf.",
+  "description": "Prebuilt binaries for wkhtmltopdf",
   "main": "index.js",
   "scripts": {
-    "install": "node-gyp rebuild",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preinstall": "npm install node-pre-gyp",
+    "install": "node-pre-gyp install --fallback-to-build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nvite/node-wkhtmltopdf.git"
+    "url": "git+https://github.com/nvite/node-wkhtmltopdf-prebuilt.git"
   },
   "author": "Evan Dudla <evan@nvite.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nvite/node-wkhtmltopdf/issues"
-  },
-  "homepage": "https://github.com/nvite/node-wkhtmltopdf#readme",
   "dependencies": {
-    "bindings": "^1.2.1",
-    "nan": "^2.4.0",
-    "node-gyp": "^3.4.0"
+    "node-pre-gyp": "^0.6.31"
   },
-  "gypfile": true
+  "binary": {
+    "module_name": "wkhtmltopdf",
+    "module_path": "./lib/binding/",
+    "host": "https://storage.googleapis.com/node-wkhtmltopdf-prebuilt"
+  }
 }
