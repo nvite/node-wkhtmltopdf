@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Prebuilt binaries for wkhtmltopdf.",
   "main": "index.js",
-  "scripts": {
-    "preinstall": "npm install node-pre-gyp",
-    "install": "node-pre-gyp install --fallback-to-build"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nvite/node-wkhtmltopdf-prebuilt.git"
