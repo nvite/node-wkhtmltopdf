@@ -8,6 +8,8 @@
       "actions": [
         {
           "action_name": "echo_message",
+          "inputs": [],
+          "outputs": [],
           "action": [
             "echo",
             "'No target needed to build!'"
