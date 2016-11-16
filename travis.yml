@@ -1,0 +1,42 @@
+language: cpp
+
+os:
+- linux
+- osx
+
+env:
+  matrix:
+    - NODE_VERSION="4"
+    - NODE_VERSION="5"
+    - NODE_VERSION="6"
+
+before_install:
+- rm -rf ~/.nvm/ && git clone --depth 1 https://github.com/creationix/nvm.git ~/.nvm
+- source ~/.nvm/nvm.sh
+- nvm install $NODE_VERSION
+- nvm use $NODE_VERSION
+- COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
+- export PATH=./node_modules/.bin/:$PATH
+- npm install node-gyp -g
+- git submodule update --init --recursive
+- PUBLISH_BINARY=false
+- if [[ $TRAVIS_BRANCH == `git describe --tags --always HEAD` ]]; then PUBLISH_BINARY=true; fi;
+- if test "${COMMIT_MESSAGE#*'[publish binary]'}" != "$COMMIT_MESSAGE"; then PUBLISH_BINARY=true; fi;
+
+install:
+- npm install --build-from-source
+- node index.js
+
+before_script:
+- if [[ $PUBLISH_BINARY == true ]]; then node-pre-gyp package publish; fi;
+- node-pre-gyp clean
+- node-gyp clean
+
+script:
+- INSTALL_RESULT=0
+- if [[ $PUBLISH_BINARY == true ]]; then INSTALL_RESULT=$(npm install --fallback-to-build=false > /dev/null)$? || true; fi;
+- if [[ $INSTALL_RESULT != 0 ]]; then echo "returned $INSTALL_RESULT";node-pre-gyp unpublish;false; fi
+- node-pre-gyp clean
+
+after_success:
+- node-pre-gyp info
